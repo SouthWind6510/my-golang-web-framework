@@ -7,5 +7,6 @@ import (
 
 func register(engine *my_web.Engine) {
 	engine.GET("/ping", handler.Ping)
-	engine.GET("/ping", handler.Pong)
+	engine.POST("/login", handler.Login)
+	engine.GET("/hello", handler.Hello)
 }
