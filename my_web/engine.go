@@ -2,15 +2,18 @@ package my_web
 
 import (
 	"log"
+	router2 "me/my-golang-web-framework/my_web/router"
 	"net/http"
 )
 
+type HandlerFunc func(*Context)
+
 type Engine struct {
-	router *routers
+	router *router2.Router
 }
 
-func New() *Engine {
-	return &Engine{router: newRouters()}
+func New(router *router2.Router) *Engine {
+	return &Engine{router: router}
 }
 
 func (e *Engine) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
