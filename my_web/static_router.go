@@ -1,25 +1,24 @@
-package router
+package my_web
 
 import (
 	"log"
-	"me/my-golang-web-framework/my_web"
 	"net/http"
 	"reflect"
 )
 
-var r *Router = new(Router)
+var _ Router = new(staticRouter)
 
 type staticRouter struct {
-	router map[string]my_web.HandlerFunc
+	router map[string]HandlerFunc
 }
 
 func NewStaticRouters() *staticRouter {
 	return &staticRouter{
-		router: make(map[string]my_web.HandlerFunc),
+		router: make(map[string]HandlerFunc),
 	}
 }
 
-func (r *staticRouter) addRouter(method, path string, handler my_web.HandlerFunc) {
+func (r *staticRouter) addRouter(method, path string, handler HandlerFunc) {
 	key := method + "_" + path
 	// 同一个路径绑定不同的handler方法
 	if _, ok := r.router[key]; ok && !reflect.DeepEqual(r.router[key], handler) {
@@ -29,7 +28,7 @@ func (r *staticRouter) addRouter(method, path string, handler my_web.HandlerFunc
 	r.router[key] = handler
 }
 
-func (r *staticRouter) handler(c *my_web.Context) {
+func (r *staticRouter) handler(c *Context) {
 	key := c.Method + "_" + c.Path
 	if handler, ok := r.router[key]; ok {
 		handler(c)

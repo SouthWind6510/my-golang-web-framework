@@ -1,7 +1,7 @@
 package main
 
 import (
-	"me/my-golang-web-framework/handler"
+	"me/my-golang-web-framework/main/handler"
 	"me/my-golang-web-framework/my_web"
 )
 
