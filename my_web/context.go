@@ -12,6 +12,7 @@ type Context struct {
 
 	Path   string
 	Method string
+	Params map[string]string // 记录动态路由中的参数实际值
 
 	StatusCode int
 }
@@ -31,6 +32,10 @@ func (c *Context) PostForm(key string) string {
 
 func (c *Context) Query(key string) string {
 	return c.Req.URL.Query().Get(key)
+}
+
+func (c *Context) Param(key string) string {
+	return c.Params[key]
 }
 
 func (c *Context) Status(code int) {

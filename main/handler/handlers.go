@@ -21,3 +21,7 @@ func Hello(c *my_web.Context) {
 	html := fmt.Sprintf("<h1>hello %s</h1>", c.Query("username"))
 	c.HTML(http.StatusOK, html)
 }
+
+func Name(c *my_web.Context) {
+	c.String(http.StatusOK, "hello %s\nthere are %s\n", c.Params["name"], c.Path)
+}
