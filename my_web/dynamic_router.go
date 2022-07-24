@@ -1,6 +1,7 @@
 package my_web
 
 import (
+	"log"
 	"net/http"
 	"strings"
 )
@@ -42,6 +43,7 @@ func (r dynamicRouter) addRouter(method, path string, handler HandlerFunc) {
 	// 向 trie 树中添加路由
 	parts := parsePath(path)
 	r.roots[method].insert(path, parts, 0)
+	log.Printf("%s already insert\n", method+"_"+path)
 	r.router[method+"_"+path] = handler
 }
 

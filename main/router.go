@@ -7,7 +7,9 @@ import (
 
 func register(engine *my_web.Engine) {
 	engine.GET("/ping", handler.Ping)
-	engine.POST("/login", handler.Login)
-	engine.GET("/hello", handler.Hello)
-	engine.GET("/name/:name", handler.Name)
+	v1 := engine.Group("/v1")
+	v1.GET("/hello", handler.Hello)
+	api := v1.Group("/api")
+	api.POST("/login", handler.Login)
+	api.GET("/name/:name", handler.Name)
 }

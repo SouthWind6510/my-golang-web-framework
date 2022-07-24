@@ -3,9 +3,7 @@ package main
 import "me/my-golang-web-framework/my_web"
 
 func main() {
-	//r := my_web.NewStaticRouters()
-	r := my_web.NewDynamicRouter()
-	engine := my_web.New(r)
+	engine := my_web.New(nil)
 	register(engine)
 	engine.Run(":9999", engine)
 }
